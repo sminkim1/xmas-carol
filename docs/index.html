@@ -268,7 +268,7 @@
   if (window.__paint) enable(); else window.addEventListener("paint-ready", enable);
   play.addEventListener("click", () => { if (audio.ended) audio.currentTime = 0; audio.play(); play.hidden = true; cancelAnimationFrame(raf); raf = requestAnimationFrame(loop); });
   audio.addEventListener("ended", () => { window.__paint(30); play.hidden = false; label.textContent = "다시 보기"; });
-  document.querySelector(".stage").addEventListener("click", (e) => { if (e.target === play || play.hidden === false) return; audio.pause(); play.hidden = false; label.textContent = "이어서 재생"; });
+  document.querySelector(".stage").addEventListener("click", (e) => { if (play.contains(e.target) || !play.hidden || audio.paused) return; audio.pause(); play.hidden = false; label.textContent = "이어서 재생"; });
 </script>
 </body>
 </html>
